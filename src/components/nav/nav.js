@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SideNav from './side_nav';
+import './nav.css';
 
 class Nav extends Component {
     state = {
@@ -17,8 +18,10 @@ class Nav extends Component {
         sideNavRef: null
     }
 
-    componentDidMount(){
-        console.log('Side Nav Ref:', this.state.sideNavRef);
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.sideNavRef && !prevState.sideNavRef){
+            M.Sidenav.init(this.state.sideNavRef);
+        }
     }
 
     setSideNavRef = e => {
@@ -58,6 +61,7 @@ class Nav extends Component {
                 <nav className="chat-nav blue darken-4">
                     <div className="nav-wrapper">
                         <Link to="/" className="brand-logo">Fire Chat</Link>
+                        <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
                             {this.renderLinks()}
                         </ul>
@@ -70,3 +74,5 @@ class Nav extends Component {
         );
     }
 }
+
+export default Nav;
