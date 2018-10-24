@@ -1,19 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { signOut } from '../../actions';
 import SideNav from './side_nav';
 import './nav.css';
 
 class Nav extends Component {
     state = {
-        authLinks: [
-            {to: '/lobby', name: 'Chat Lobby'},
-            {to: '/profile', name: 'Profile'}
-        ],
         links: [
             {to: '/', name: 'Home'},
-            {to: '/sign-in', name: 'Sign In'},
-            {to: '/sign-up', name: 'Sign Up'}
+        ],
+        guestLinks: [
+            { to: '/account/sign-in', name: 'Sign In' },
+            { to: '/account/create', name: 'Sign Up' }
+        ],
+        userLinks: [
+            { to: '/rooms', name: 'Chat Lobby' },
+            { to: '/account/profile', name: 'Profile' }
         ],
         sideNavRef: null
     }
@@ -41,18 +44,26 @@ class Nav extends Component {
             </li>
         );
     }
+
+    signOutElement(){
+        return (
+            <li key="/sign-out">
+                <button onClick={this.props.signOut} className="btn blue lighten-2">Sign Out</button>
+            </li>
+        );
+    }
     
     renderLinks = () => {
         const { auth } = this.props;
-        const { authLinks, links } = this.state;
+        const { links, guestLinks, userLinks } = this.state;
 
         let linkElements = links.map(this.makeLink);
 
         if(auth){
-            linkElements = [...linkElements, ...authLinks.map(this.makeLink)];
+            return [...linkElements, ...userLinks.map(this.makeLink), this.signOutElement()];
         }
 
-        return linkElements;
+        return [...linkElements, ...guestLinks.map(this.makeLink)];
     }
 
     render(){
@@ -75,4 +86,10 @@ class Nav extends Component {
     }
 }
 
-export default Nav;
+function mapStateToProps(state){
+    return {
+        auth: state.user.auth
+    }
+}
+
+export default connect(mapStateToProps, { signOut })(Nav);

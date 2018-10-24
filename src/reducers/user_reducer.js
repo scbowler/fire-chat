@@ -6,6 +6,8 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, action) => {
     switch (action.type) {
+        case types.SIGN_OUT:
+            return { ...DEFAULT_STATE };
         default:
             return state;
     }
