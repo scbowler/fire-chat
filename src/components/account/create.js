@@ -21,10 +21,10 @@ class AccountCreate extends Component {
                         <Field name="confirmPassword" label="Confirm Password" type="password" component={Input} />
 
                         <div className="row">
-                            <div className="center col m6 s12">
+                            <div className="center col s6">
                                 <Link to="/" className="btn red darken-2">Cancel</Link>
                             </div>
-                            <div className="center col m6 s12">
+                            <div className="center col s6">
                                 <button className="btn blue darken-4">Sign Up</button>
                                 <p className="red-text text-darken-2">{authError}</p>
                             </div>
