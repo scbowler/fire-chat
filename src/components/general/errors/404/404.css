@@ -1,0 +1,12 @@
+.not-found {
+    display: flex;
+    height: calc(100vh - 64px);
+}
+
+.not-found .not-found-content {
+    margin: auto;
+}
+
+.not-found .not-found-content i {
+    font-size: 4em;
+}
