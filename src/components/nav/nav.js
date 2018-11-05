@@ -15,7 +15,7 @@ class Nav extends Component {
             { to: '/account/create', name: 'Sign Up' }
         ],
         userLinks: [
-            { to: '/chat/lobby', name: 'Chat Lobby' },
+            { to: '/chat', name: 'Chat Lobby' },
             { to: '/account/profile', name: 'Profile' }
         ],
         sideNavRef: null

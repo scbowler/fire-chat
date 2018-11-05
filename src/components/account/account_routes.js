@@ -12,12 +12,12 @@ export default props => {
             <Route path={`${path}/create`} component={
                 auth(lazyLoad({
                     load: () => import('./create')
-                }), '/chat/lobby', false)
+                }), '/chat', false)
             }/>
             <Route path={`${path}/sign-in`} component={
                 auth(lazyLoad({
                     load: () => import('./sign_in')
-                }), '/chat/lobby', false)
+                }), '/chat', false)
             } />
             <Route component={NotFound}/>
         </Switch>
