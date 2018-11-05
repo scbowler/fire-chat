@@ -9,17 +9,17 @@ export default props => {
 
     return (
         <Switch>
-            <Route path={`${path}/create`} component={
+            <Route path={path} component={
                 auth(lazyLoad({
-                    load: () => import('./create')
-                }), '/chat/lobby', false)
-            }/>
-            <Route path={`${path}/sign-in`} component={
-                auth(lazyLoad({
-                    load: () => import('./sign_in')
-                }), '/chat/lobby', false)
+                    load: () => import('./chat_lobby')
+                }))
             } />
-            <Route component={NotFound}/>
+            <Route path={`${path}/:room-id`} component={
+                auth(lazyLoad({
+                    load: () => import('./chat_room')
+                }))
+            } />
+            <Route component={NotFound} />
         </Switch>
     );
 }
