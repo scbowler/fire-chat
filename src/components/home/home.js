@@ -13,11 +13,11 @@ export default props => (
                 <p><b>Some Text Here</b></p>
             </div>
             <div className="col s12 m4">
-                <h1><i className="material-icons">insert_chart</i></h1>
+                <h1><i className="material-icons">language</i></h1>
                 <p><b>Some Text Here</b></p>
             </div>
             <div className="col s12 m4">
-                <h1><i className="material-icons">language</i></h1>
+                <h1><i className="material-icons">insert_chart</i></h1>
                 <p><b>Some Text Here</b></p>
             </div>
         </div>

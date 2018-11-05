@@ -6,8 +6,6 @@ import NotFound from '../general/errors/404';
 export default props => {
     const { path } = props.match;
 
-    console.log('Path:', path);
-
     return (
         <Switch>
             <Route path={`${path}/create`} component={lazyLoad({
