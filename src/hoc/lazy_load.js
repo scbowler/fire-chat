@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import Loading from '../components/loading';
+import Loading from '../components/general/loading';
 
 export default (options) => {
     return class extends Component {
@@ -7,7 +7,7 @@ export default (options) => {
             super(props);
 
             this.unMounting = false;
-            this.defaultLoading = <Loading />;
+            this.defaultLoading = <Loading container/>;
 
             const { loading } = options;
 

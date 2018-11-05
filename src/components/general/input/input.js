@@ -1,4 +1,5 @@
 import React from 'react';
+import './input.css';
 
 export default ({className, input, label, meta: {error, touched}, type}) => (
     <div className={`input-field ${className || ''}`}>

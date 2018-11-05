@@ -11,6 +11,9 @@ export default props => (
         <Route path="/account" component={lazyLoad({
             load: () => import('./account')
         })} />
+        <Route path="/chat" component={lazyLoad({
+            load: () => import('./chat')
+        })} />
         <Route component={NotFound}/>
     </Switch>
 );
