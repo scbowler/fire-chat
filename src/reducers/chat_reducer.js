@@ -8,6 +8,8 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, action) => {
     switch(action.type){
+        case types.CLEAR_ROOM_DATA:
+            return { ...DEFAULT_STATE };
         case types.GET_CHAT_LOG:
             return { ...state, messages: action.messages };
         case types.GET_CHAT_ROOMS:

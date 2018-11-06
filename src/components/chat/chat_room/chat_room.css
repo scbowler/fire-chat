@@ -9,7 +9,7 @@
 
 .chat-container {
     margin: auto;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 335px);
     overflow-y: scroll;
     position: relative;
     width: 650px;
@@ -67,7 +67,7 @@
 
 @media screen and (max-width: 750px){
     .chat-container {
-        max-height: calc(100vh - 325px);
+        max-height: calc(100vh - 360px);
         width: 100%;
     }
 
