@@ -1,3 +1,23 @@
-.home .home-icons i {
-    font-size: 2.5em;
+.home .home-buttons {
+    padding-top: 14vh;
+}
+
+.home .home-buttons .btn-large {
+    width: 300px;
+}
+
+@media screen and (max-width: 800px){
+    .home .home-buttons .btn-large {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .home .home-buttons {
+        padding-top: 7vh;
+    }
+    .home .home-buttons .btn-large {
+        display: block;
+        margin: 20px;
+    }
 }

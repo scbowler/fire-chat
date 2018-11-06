@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { getChatLog, getRoomInfo, sendMessage } from '../../../actions';
+import { clearRoomData, getChatLog, getRoomInfo, leaveRoom, sendMessage } from '../../../actions';
 import Header from '../../general/header';
 import Input from '../../general/input';
 import Loading from '../../general/loading';
 import './chat_room.css';
 
 class ChatRoom extends Component {
-    componentDidMount(){
+    async componentDidMount(){
         this.scrollTop();
 
-        this.roomRef = this.props.getRoomInfo(this.props.match.params.room_id);
+        const { getRoomInfo, history, match } = this.props;
+
+        this.roomRef = await getRoomInfo(match.params.room_id);
+
+        if(!this.roomRef){
+            history.push('/not-found');
+        }
     }
 
     componentDidUpdate(prevProps){
@@ -24,6 +29,12 @@ class ChatRoom extends Component {
     }
 
     componentWillUnmount(){
+        const { clearRoomData, leaveRoom, match } = this.props;
+
+        clearRoomData();
+
+        leaveRoom(match.params.room_id);
+
         if(this.roomRef){
             this.roomRef();
         }
@@ -77,6 +88,9 @@ class ChatRoom extends Component {
         return (
             <div className="chat-room">
                 <Header>{roomInfo ? roomInfo.name : 'Chat Room'}</Header>
+                <p className="center grey-text lighten-1">
+                    Users in Room: <b>{roomInfo ? roomInfo.users.length : '...'}</b>
+                </p>
                 <div ref={ e => this.chat = e} className="chat-container">
                     {this.renderMessages()}
                 </div>
@@ -105,4 +119,4 @@ ChatRoom = reduxForm({
     form: 'chat-message'
 })(ChatRoom);
 
-export default connect(mapStateToProps, { getChatLog, getRoomInfo, sendMessage })(ChatRoom);
+export default connect(mapStateToProps, { clearRoomData, getChatLog, getRoomInfo, leaveRoom, sendMessage })(ChatRoom);

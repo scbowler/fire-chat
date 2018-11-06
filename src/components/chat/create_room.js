@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { createRoom } from '../../actions';
 import Header from '../general/header';
 import Input from '../general/input';
 
 class CreateRoom extends Component {
+    handleCreatingRoom = async roomInfo => {
+        const { createRoom, history } = this.props;
+
+        const roomId = await createRoom(roomInfo);
+
+        history.push(`/chat/${roomId}`);
+    }
+
     render() {
         const { handleSubmit } = this.props;
 
@@ -13,7 +22,7 @@ class CreateRoom extends Component {
             <div>
                 <Header>Create Room</Header>
                 <div className="row">
-                    <form onSubmit={handleSubmit(console.log)} className="col s12 m8 offset-m2">
+                    <form onSubmit={handleSubmit(this.handleCreatingRoom)} className="col s12 m8 offset-m2">
                         <Field name="name" label="Room Name" component={Input} />
                         <Field name="topic" label="Room Topic" component={Input} />
                         <Field name="description" label="Room Description" component={Input} />
@@ -49,4 +58,4 @@ CreateRoom = reduxForm({
     validate
 })(CreateRoom);
 
-export default connect(null)(CreateRoom);
+export default connect(null, { createRoom })(CreateRoom);
