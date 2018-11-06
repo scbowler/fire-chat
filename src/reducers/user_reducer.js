@@ -1,4 +1,4 @@
-import types from '../actions/types';
+import { userTypes as types } from '../actions/types';
 
 const DEFAULT_STATE = {
     auth: false,

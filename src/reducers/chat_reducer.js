@@ -1,4 +1,4 @@
-import types from '../actions/types';
+import { chatTypes as types } from '../actions/types';
 
 const DEFAULT_STATE = {
     chatRooms: null,
