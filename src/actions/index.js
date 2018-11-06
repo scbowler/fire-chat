@@ -6,12 +6,20 @@ export const signOut = () => () => {
     auth.signOut();
 }
 
+export const getRoomInfo = roomId => async dispatch => {
+    const roomRef = db.collection('chat-rooms').doc(roomId);
+
+    roomRef.onSnapshot( room => {
+        console.log('Room Info:', room.data());
+    })
+}
+
 export const getRoomList = () => async dispatch => {
     try {
-        const roomRef = db.collection('chat-rooms');
+        const roomsRef = db.collection('chat-rooms');
         const rooms = [];
 
-        roomRef.orderBy('created', 'desc').onSnapshot(docs => {
+        roomsRef.orderBy('created', 'desc').onSnapshot(docs => {
             docs.forEach(doc => {
                 rooms.push({...doc.data(), id: doc.id});
             });
@@ -40,7 +48,8 @@ export const createAccount = ({email, password, username}) => async dispatch => 
 
         dispatch({
             type: types.SIGN_IN,
-            username 
+            uid: user.uid,
+            username
         });
     } catch(err) {
         
@@ -66,11 +75,14 @@ export const signIn = ({email, password}) => async dispatch => {
 export const authChange = dispatch => {
     auth.onAuthStateChanged( user => {
         if(user){
-            localStorage.setItem('chat-uid', user.uid);
+            const { uid, displayName: username } = user;
+            
+            localStorage.setItem('chat-uid', uid);
 
             dispatch({
                 type: types.SIGN_IN,
-                username: user.displayName
+                uid,
+                username
             });
         } else {
             localStorage.removeItem('chat-uid');
