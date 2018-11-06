@@ -2,7 +2,32 @@ import { chatTypes as types } from './types'
 import { auth, db } from '../firebase';
 
 export const createRoom = roomInfo => async dispatch => {
+    const now = new Date();
+
+    const firstMessage = {
+        message: `Welcome to room: "${roomInfo.name}"`,
+        name: 'Admin Bot',
+        ts: now,
+        uid: 'bot'
+    }
+
+    const newRef = db.collection('logs').doc();
     
+    await db.collection(`logs/${newRef.id}/messages`).add(firstMessage);
+
+    const newRoom = {
+        ...roomInfo,
+        created: now,
+        createdBy: auth.currentUser.uid,
+        logId: newRef.id,
+        users: []
+    }
+
+    const roomRef = db.collection('chat-rooms').doc();
+
+    await roomRef.set(newRoom);
+
+    return roomRef.id;
 }
 
 export const getChatLog = logId => dispatch => {
