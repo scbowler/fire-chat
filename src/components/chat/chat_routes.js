@@ -19,7 +19,7 @@ export default props => {
                     load: () => import('./create_room')
                 }))
             } />
-            <Route path={`${path}/:room-id`} component={
+            <Route path={`${path}/:room_id`} component={
                 auth(lazyLoad({
                     load: () => import('./chat_room')
                 }))

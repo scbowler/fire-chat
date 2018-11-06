@@ -1,9 +1,31 @@
 import types from './types'
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import { getErrorMessage } from '../helpers';
 
 export const signOut = () => () => {
     auth.signOut();
+}
+
+export const getRoomList = () => async dispatch => {
+    try {
+        const roomRef = db.collection('chat-rooms');
+        const rooms = [];
+
+        roomRef.orderBy('created', 'desc').onSnapshot(docs => {
+            docs.forEach(doc => {
+                rooms.push({...doc.data(), id: doc.id});
+            });
+
+            dispatch({
+                type: types.GET_CHAT_ROOMS,
+                rooms
+            });
+        });
+
+
+    } catch(err) {
+        console.log('Get Room List Error:', err);
+    }
 }
 
 export const createAccount = ({email, password, username}) => async dispatch => {
