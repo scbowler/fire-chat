@@ -24,6 +24,22 @@ export const authChange = dispatch => {
     });
 }
 
+export const signIn = ({ email, password }) => async dispatch => {
+    try {
+        await auth.signInWithEmailAndPassword(email, password);
+    } catch (err) {
+
+        dispatch({
+            type: types.AUTH_ERROR,
+            error: getErrorMessage(err)
+        });
+    }
+}
+
+export const signOut = () => () => {
+    auth.signOut();
+}
+
 export const clearAuthError = () => ({ type: types.CLEAR_AUTH_ERROR });
 
 export const createAccount = ({ email, password, username }) => async dispatch => {
@@ -48,20 +64,4 @@ export const createAccount = ({ email, password, username }) => async dispatch =
             error: getErrorMessage(err)
         });
     }
-}
-
-export const signIn = ({ email, password }) => async dispatch => {
-    try {
-        await auth.signInWithEmailAndPassword(email, password);
-    } catch (err) {
-
-        dispatch({
-            type: types.AUTH_ERROR,
-            error: getErrorMessage(err)
-        });
-    }
-}
-
-export const signOut = () => () => {
-    auth.signOut();
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getRoomList } from '../../actions';
+import { getRoomList } from '../../../actions';
 import { Link } from 'react-router-dom';
-import Header from '../general/header';
-import Loading from '../general/loading';
+import Header from '../../general/header';
+import Loading from '../../general/loading';
 import RoomInfo from './room_info';
 
 class ChatLobby extends Component {
