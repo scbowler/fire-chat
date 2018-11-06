@@ -8,7 +8,13 @@ import RoomInfo from './room_info';
 
 class ChatLobby extends Component {
     componentDidMount(){
-        this.props.getRoomList();
+        this.roomRef = this.props.getRoomList();
+    }
+
+    componentWillUnmount(){
+        if(this.roomRef){
+            this.roomRef();
+        }
     }
 
     renderRooms(){

@@ -1,10 +1,10 @@
 import { chatTypes as types } from './types'
 import { auth, db } from '../firebase';
 
-export const getChatLog = logId => async dispatch => {
+export const getChatLog = logId => dispatch => {
     const logRef = db.collection(`logs/${logId}/messages`);
 
-    logRef.orderBy('ts').limit(100).onSnapshot( docs => {
+    return logRef.orderBy('ts').limit(100).onSnapshot( docs => {
         const messages = [];
 
         docs.forEach(msg => {
@@ -22,10 +22,10 @@ export const getChatLog = logId => async dispatch => {
     });
 }
 
-export const getRoomInfo = roomId => async dispatch => {
+export const getRoomInfo = roomId => dispatch => {
     const roomRef = db.collection('chat-rooms').doc(roomId);
 
-    roomRef.onSnapshot(room => {
+    return roomRef.onSnapshot(room => {
         dispatch({
             type: types.GET_ROOM_INFO,
             currentRoom: room.data()
@@ -33,12 +33,12 @@ export const getRoomInfo = roomId => async dispatch => {
     });
 }
 
-export const getRoomList = () => async dispatch => {
+export const getRoomList = () => dispatch => {
     try {
         const roomsRef = db.collection('chat-rooms');
         const rooms = [];
 
-        roomsRef.orderBy('created', 'desc').onSnapshot(docs => {
+        return roomsRef.orderBy('created', 'desc').onSnapshot(docs => {
             docs.forEach(doc => {
                 rooms.push({ ...doc.data(), id: doc.id });
             });

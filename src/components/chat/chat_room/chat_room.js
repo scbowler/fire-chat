@@ -12,14 +12,23 @@ class ChatRoom extends Component {
     componentDidMount(){
         this.scrollTop();
 
-        this.props.getRoomInfo(this.props.match.params.room_id);
+        this.roomRef = this.props.getRoomInfo(this.props.match.params.room_id);
     }
 
     componentDidUpdate(prevProps){
         const { getChatLog, roomInfo } = this.props;
         
         if(!prevProps.roomInfo && roomInfo && roomInfo.logId){
-            getChatLog(roomInfo.logId);
+            this.logRef = getChatLog(roomInfo.logId);
+        }
+    }
+
+    componentWillUnmount(){
+        if(this.roomRef){
+            this.roomRef();
+        }
+        if(this.logRef){
+            this.logRef();
         }
     }
 
