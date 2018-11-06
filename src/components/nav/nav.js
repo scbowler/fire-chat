@@ -15,7 +15,7 @@ class Nav extends Component {
             { to: '/account/create', name: 'Sign Up' }
         ],
         userLinks: [
-            { to: '/rooms', name: 'Chat Lobby' },
+            { to: '/chat', name: 'Chat Lobby' },
             { to: '/account/profile', name: 'Profile' }
         ],
         sideNavRef: null
@@ -47,7 +47,7 @@ class Nav extends Component {
 
     signOutElement(){
         return (
-            <li key="/sign-out">
+            <li key="/sign-out" className="center">
                 <button onClick={this.props.signOut} className="btn blue lighten-2">Sign Out</button>
             </li>
         );

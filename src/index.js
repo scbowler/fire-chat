@@ -7,14 +7,14 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import think from './middleware/think';
 import { authChange } from './actions';
-import types from './actions/types';
+import { userTypes } from './actions/types';
 
 import App from './components/app';
 
 const store = createStore(rootReducer, {}, applyMiddleware(think));
 
 if(localStorage.getItem('chat-uid')){
-    store.dispatch({type: types.SIGN_IN});
+    store.dispatch({type: userTypes.SIGN_IN});
 }
 
 authChange(store.dispatch);
