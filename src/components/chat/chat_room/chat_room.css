@@ -64,3 +64,23 @@
     right: 0;
     top: 0;
 }
+
+@media screen and (max-width: 750px){
+    .chat-container {
+        max-height: calc(100vh - 325px);
+        width: 100%;
+    }
+
+    .message-input-container {
+        padding: 0 15%;
+        width: 100%
+    }
+
+    .message-input {
+        width: 100%;
+    }
+
+    .message-input p {
+        display: none;
+    }
+}

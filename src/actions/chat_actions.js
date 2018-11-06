@@ -1,6 +1,10 @@
 import { chatTypes as types } from './types'
 import { auth, db } from '../firebase';
 
+export const createRoom = roomInfo => async dispatch => {
+    
+}
+
 export const getChatLog = logId => dispatch => {
     const logRef = db.collection(`logs/${logId}/messages`);
 
