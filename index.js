@@ -14,4 +14,4 @@ if(ENV === 'dev'){
     app.listen(PORT, () => console.log(`Server running on PORT:${PORT}`));
 }
 
-module.exports = app;
+exports.app = app;
